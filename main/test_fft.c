@@ -9,9 +9,9 @@
 #include <math.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "sdkconfig.h"
 
 #include "soc/timer_group_struct.h"
+#include "driver/gpio.h"
 #include "driver/periph_ctrl.h"
 #include "driver/timer.h"
 
@@ -121,8 +121,8 @@ void fft_test_task()
     for (k = 0 ; k < 2 * fft_analysis->size ; k++)
       if (abs(fft_analysis->input[k] - fft_synthesis->output[k]) > 1e-5)
       {
-        printf("bin=%d input=%.4f output=%.4f\n err=%f", 
-            k, fft_analysis->input[k], fft_synthesis->output[k], 
+        printf("bin=%d input=%.4f output=%.4f\n err=%f",
+            k, fft_analysis->input[k], fft_synthesis->output[k],
             fabsf(fft_analysis->input[k] - fft_synthesis->output[k]));
         n_errors++;
       }
@@ -177,8 +177,8 @@ void rfft_test_task()
     for (k = 0 ; k < fft_analysis->size ; k++)
       if (abs(fft_analysis->input[k] - fft_synthesis->output[k]) > 1e-5)
       {
-        printf("bin=%d input=%.4f output=%.4f\n err=%f", 
-            k, fft_analysis->input[k], fft_synthesis->output[k], 
+        printf("bin=%d input=%.4f output=%.4f\n err=%f",
+            k, fft_analysis->input[k], fft_synthesis->output[k],
             fabsf(fft_analysis->input[k] - fft_synthesis->output[k]));
         n_errors++;
       }
